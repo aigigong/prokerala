@@ -34,12 +34,26 @@ summarises the results using OpenAI first, falling back to DeepSeek if required.
 
 ## Deploying to Vercel
 
+### One-click deploy from GitHub (recommended)
+
 1. Create a new Vercel project and import this repository.
-2. Set the following environment variables in the Vercel dashboard (Project Settings → Environment Variables):
+2. In Vercel, copy the `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` values from the project settings.
+3. In your GitHub repository settings, create the following Action secrets:
+   - `VERCEL_TOKEN` – a [Vercel token](https://vercel.com/account/tokens) with deploy permissions.
+   - `VERCEL_ORG_ID` – copied in step 2.
+   - `VERCEL_PROJECT_ID` – copied in step 2.
    - `PROKERALA_CLIENT_ID`
    - `PROKERALA_CLIENT_SECRET`
    - `OPENAI_API_KEY` (optional)
    - `DEEPSEEK_API_KEY` (optional)
+4. Push to `main` (or trigger the workflow manually) to run the **Deploy to Vercel** GitHub Action. The workflow
+   builds the Next.js app and publishes it to production. Once complete, Vercel assigns a `vercel.app` URL that you
+   can share immediately.
+
+### Manual deploy via Vercel dashboard
+
+1. Create or import the project on Vercel.
+2. Set the same environment variables as secrets in the Vercel dashboard (Project Settings → Environment Variables).
 3. Trigger a deploy. Vercel will run `npm install` and `npm run build` automatically. Once the deployment is live,
    open the provided `vercel.app` URL to access the dashboard.
 
